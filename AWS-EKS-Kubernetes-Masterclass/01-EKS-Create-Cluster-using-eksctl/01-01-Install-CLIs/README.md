@@ -83,8 +83,35 @@ kubectl version --short --client
 Output: Client Version: v1.16.8-eks-e16311
 ```
 
+### Step-02-02: Linux - Install and configure kubectl
+- Kubectl version we are using here is 1.16.8 (It may vary based on Cluster version you are planning use in AWS EKS)
 
-### Step-02-02: Windows 10 - Install and configure kubectl
+```
+# Download the Package
+mkdir kubectlbinary
+cd kubectlbinary
+curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.31.0/2024-09-12/bin/linux/amd64/kubectl
+
+# (Optional) Verify the downloaded binary with the SHA-256 
+curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.31.0/2024-09-12/bin/linux/amd64/kubectl.sha256
+
+# Check the SHA-256 checksum for your downloaded binary
+sha256sum -c kubectl.sha256
+
+# Provide execute permissions
+chmod +x ./kubectl
+
+# Set the Path by copying to user Home Directory
+mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
+echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc
+
+# Verify the kubectl version
+kubectl version --short --client
+Output: Client Version: v1.31.0-eks-a737599
+Kustomize Version: v5.4.2
+```
+
+### Step-02-03: Windows 10 - Install and configure kubectl
 - Install kubectl on Windows 10 
 ```
 mkdir kubectlbinary
@@ -100,6 +127,7 @@ C:\Users\KALYAN\Documents\kubectlbinary
 kubectl version --short --client
 kubectl version --client
 ```
+
 
 ## Step-03: Install eksctl CLI
 ### Step-03-01: eksctl on Mac

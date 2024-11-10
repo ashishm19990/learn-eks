@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: name
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: name
+  template:
+    metadata:
+      labels:
+        app: name
+    spec:
+      restartPolicy: Always            # Always, OnFailure, Never
+      containers:
+      - name: name
+        image: image
+        imagePullPolicy: IfNotPresent  # Always, IfNotPresent, Never
+        ports:
+        - containerPort: port
